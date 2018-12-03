@@ -1,3 +1,11 @@
-<p>
-  lesson-list works!
-</p>
+<h1>Tanórák</h1>
+
+<mat-list>
+  <div *ngFor="let subject of subjects; last as last">
+    <h2 matSubheader>{{subject.name}}</h2>
+    <mat-list-item *ngFor="let lesson of subject.lessons">
+      <h3 matLine>Csoport: {{lesson.group}}</h3>
+    </mat-list-item>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </div>
+</mat-list>

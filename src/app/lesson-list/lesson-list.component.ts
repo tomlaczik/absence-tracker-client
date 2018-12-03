@@ -7,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LessonListComponent implements OnInit {
 
-  constructor() { }
+  private subjects = [
+    {name: "Tantárgy 1", lessons: [
+      {group: 6},
+      {group: 2},
+    ]},
+    {name: "Tantárgy 2", lessons: [
+      {group: 5},
+      {group: 3},
+    ]}
+  ];
+
+  constructor() {}
 
   ngOnInit() {
   }
