@@ -5,12 +5,13 @@
 <mat-list>
   <div *ngFor="let subject of filteredSubjects; last as last">
     <h2 matSubheader>{{subject.name}}</h2>
-    <mat-list-item *ngFor="let lesson of filteredSubjects.lessons">
-      <h3 matLine>Csoport: {{lesson.group}}</h3>
-      <button *ngIf="!lesson.registered" mat-button routerLink="/lessons">
+    <mat-list-item *ngFor="let lesson of subject.lessons">
+      <h3 matLine>Nap: {{lesson.weekday}}</h3>
+      <h3 matLine>Időpont: {{lesson.time}}</h3>
+      <button mat-button routerLink="/lessons">
         <mat-icon>book</mat-icon> Felvesz
       </button>
-      <button *ngIf="lesson.registered" mat-button routerLink="/absences">
+      <button mat-button routerLink="/absences">
         <mat-icon>book</mat-icon> Lead
       </button>
     </mat-list-item>

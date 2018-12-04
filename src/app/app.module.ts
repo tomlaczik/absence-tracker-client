@@ -9,6 +9,7 @@ import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { AbsenceListComponent } from './absence-list/absence-list.component';
 import { RoutingModule } from './routing/routing.module';
 import { LessonFilterComponent } from './lesson-filter/lesson-filter.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LessonFilterComponent } from './lesson-filter/lesson-filter.component';
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

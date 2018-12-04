@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LessonService } from '../lesson.service';
 
 @Component({
   selector: 'lesson-list',
@@ -23,10 +24,10 @@ export class LessonListComponent implements OnInit {
 
   private filteredSubjects;
 
-  constructor() {}
+  constructor(private lessonService: LessonService) {}
 
-  ngOnInit() {
-    this.filteredSubjects = this.subjects;
+  async ngOnInit() {
+    this.filteredSubjects = await this.lessonService.getAll();
   }
 
   onFilterChange(data) {
