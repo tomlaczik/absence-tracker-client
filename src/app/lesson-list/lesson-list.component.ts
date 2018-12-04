@@ -9,18 +9,27 @@ export class LessonListComponent implements OnInit {
 
   private subjects = [
     {name: "Tantárgy 1", lessons: [
-      {group: 6},
-      {group: 2},
+      {group: 6, registered: false},
+      {group: 2, registered: true},
+      {group: 8, registered: false},
+      {group: 11, registered: false},
     ]},
     {name: "Tantárgy 2", lessons: [
-      {group: 5},
-      {group: 3},
+      {group: 69, registered: false},
+      {group: 5, registered: false},
+      {group: 3, registered: true},
     ]}
   ];
+
+  private filteredSubjects;
 
   constructor() {}
 
   ngOnInit() {
+    this.filteredSubjects = this.subjects;
+  }
+
+  onFilterChange(data) {
   }
 
 }

@@ -1,10 +1,18 @@
 <h1>Tanórák</h1>
 
+<lesson-filter [status]="selectedStatus" (change)="onFilterChange($event)"></lesson-filter>
+
 <mat-list>
-  <div *ngFor="let subject of subjects; last as last">
+  <div *ngFor="let subject of filteredSubjects; last as last">
     <h2 matSubheader>{{subject.name}}</h2>
-    <mat-list-item *ngFor="let lesson of subject.lessons">
+    <mat-list-item *ngFor="let lesson of filteredSubjects.lessons">
       <h3 matLine>Csoport: {{lesson.group}}</h3>
+      <button *ngIf="!lesson.registered" mat-button routerLink="/lessons">
+        <mat-icon>book</mat-icon> Felvesz
+      </button>
+      <button *ngIf="lesson.registered" mat-button routerLink="/absences">
+        <mat-icon>book</mat-icon> Lead
+      </button>
     </mat-list-item>
     <mat-divider *ngIf="!last"></mat-divider>
   </div>
