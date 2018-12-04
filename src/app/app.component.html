@@ -1,14 +1,21 @@
 <mat-toolbar color="primary">
   Absence Tracker
-  <button mat-button routerLink="/lessons">
-    <mat-icon>book</mat-icon> Tanórák
-  </button>
-  <button mat-button routerLink="/absences">
-    <mat-icon>today</mat-icon> Hiányzások
-  </button>
-  <button mat-button href="/">
-    <mat-icon>lock</mat-icon> Kijelentkezés (username)
-  </button>
+  <div *ngIf="authService.user">
+    <button mat-button routerLink="/lessons">
+      <mat-icon>book</mat-icon> Tanórák
+    </button>
+    <button mat-button routerLink="/absences">
+      <mat-icon>today</mat-icon> Hiányzások
+    </button>
+    <button mat-button (click)="logout()">
+      <mat-icon>lock</mat-icon> Kijelentkezés ({{authService.user.username}})
+    </button>
+  </div>
+  <div *ngIf="!authService.user">
+    <button mat-button routerLink="/login">
+      <mat-icon>lock</mat-icon> Bejelentkezés
+    </button>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
