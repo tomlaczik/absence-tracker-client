@@ -13,6 +13,7 @@ export class LessonListComponent implements OnInit {
 
   private filteredSubjects: Subject[];
   private subjects: Subject[];
+  private lessonFilter: String = 'all';
 
   constructor(private lessonService: LessonService, private authService: AuthService) {}
 
@@ -22,11 +23,17 @@ export class LessonListComponent implements OnInit {
   }
 
   onFilterChange(data) {
-    console.log(this.authService.user);
+    this.lessonFilter = data.value;
   }
 
   isLessonActive(lesson: Lesson) {
     return this.authService.user.activeLessons.some(aLesson => aLesson.id === lesson.id);
+  }
+
+  isLessonHidden(lesson: Lesson) {
+    let activeLessons = this.authService.user.activeLessons;
+    return this.lessonFilter === 'registered' && !activeLessons.some(aLesson => aLesson.id === lesson.id) ||
+           this.lessonFilter === 'notRegistered' && activeLessons.some(aLesson => aLesson.id === lesson.id);
   }
 
   async takeLesson(lesson: Lesson) {

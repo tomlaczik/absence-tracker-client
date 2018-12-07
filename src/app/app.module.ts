@@ -8,7 +8,6 @@ import { MatToolbarModule, MatIconModule, MatButtonModule, MatListModule, MatBut
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { AbsenceListComponent } from './absence-list/absence-list.component';
 import { RoutingModule } from './routing/routing.module';
-import { LessonFilterComponent } from './lesson-filter/lesson-filter.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LessonListComponent,
     AbsenceListComponent,
-    LessonFilterComponent,
     LoginComponent
   ],
   imports: [
