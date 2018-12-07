@@ -1,3 +1,9 @@
-<p>
-  absence-list works!
-</p>
+
+<mat-nav-list>
+  <a *ngFor="let absence of absences" mat-list-item>
+    <h3 matLine>Lesson ID: {{ absence.lesson.id }}</h3>
+    <h4 matLine>Hét: {{ absence.week }}.</h4>
+    <h4 matLine>Hét napja: {{ absence.lesson.weekday }}</h4>
+    <mat-divider></mat-divider>
+  </a>
+</mat-nav-list>
