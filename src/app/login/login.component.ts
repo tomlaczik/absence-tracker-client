@@ -35,7 +35,16 @@ export class LoginComponent implements OnInit {
       await this.authService.login(this.username.value, this.password.value);
       this.router.navigate([this.authService.redirectUrl || '/lessons']);
     } catch {
-      this.message = 'Hibás felhasználónév vagy jelszó';
+      alert('Hibás felhasználónév vagy jelszó!');
+    }
+  }
+
+  async onRegister() {
+    try {
+      await this.authService.register(this.username.value, this.password.value);
+      this.router.navigate([this.authService.redirectUrl || '/lessons']);
+    } catch {
+      alert('Ez a felhasználónév már foglalt!');
     }
   }
 }

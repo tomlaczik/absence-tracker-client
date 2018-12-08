@@ -12,11 +12,11 @@ export class AbsenceService {
   constructor(private http: HttpClient) { }
 
   getAll(): Promise<Absence[]> {
-    return this.http.get<Absence[]>("http://localhost:8080/absences", httpOptions).toPromise();
+    return this.http.get<Absence[]>("http://localhost:8080/absences", httpOptions()).toPromise();
   }
 
   getSelf(user: User): Promise<Absence[]> {
-    return this.http.get<Absence[]>(`http://localhost:8080/users/${user.id}/absences`, httpOptions).toPromise();
+    return this.http.get<Absence[]>(`http://localhost:8080/users/${user.id}/absences`, httpOptions()).toPromise();
   }
 
 }

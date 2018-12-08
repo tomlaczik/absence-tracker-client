@@ -17,5 +17,6 @@
   
     <div>
       <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid">Login</button>
+      <button mat-flat-button type="button" color="secondary" [disabled]="form.invalid" (click)="onRegister()">Register</button>
     </div>
   </form>

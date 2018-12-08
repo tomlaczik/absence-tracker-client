@@ -21,7 +21,6 @@ export class AuthService {
 
   user: User = null;
   redirectUrl: string;
-  private url: string = `${baseUrl}/users/me`;
 
   constructor(private http: HttpClient) { }
 
@@ -32,9 +31,22 @@ export class AuthService {
     else Promise.reject();
   }
 
+  async register(username: string, password: string): Promise<any> {
+    try {
+      let user: User = new User(username, password);
+      this.user = await this.http.post<User>(`${baseUrl}/users/`, user, httpOptions()).toPromise();
+      const token = btoa(`${username}:${password}`);
+      localStorage.setItem('token', `Basic ${token}`);
+      Promise.resolve();
+    }
+    catch {
+      Promise.reject();
+    }
+  }
+
   async authenticate(): Promise<boolean> {
     try {
-      this.user = await this.http.get<User>(this.url, httpOptions()).toPromise();
+      this.user = await this.http.get<User>(`${baseUrl}/users/me`, httpOptions()).toPromise();
       return Promise.resolve(true);
     }
     catch {
