@@ -30,3 +30,5 @@
   - Új hiányzás beírása.
   
 ## Használati eset diagram
+
+![alt text](https://github.com/tomlaczik/absence-tracker-client/blob/master/usecase.png)
