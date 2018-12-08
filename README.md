@@ -23,6 +23,7 @@
 - Saját hiányzások kilistázása
   - A listában táblázatosan láthatja a felvett óráihoz beírt hiányzásokat.
 ### Tanár
+- belépés
 - Tanított órák kilistázása
   - Rákattintva egy órára kilistázódnak az arra járó diákok.
   - Hozzáadhat diákot vagy kitörölhet diákot egy-egy óráról.
