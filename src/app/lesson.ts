@@ -10,4 +10,6 @@ export class Lesson {
     students: User[];
     time: string;
     weekday: number;
+
+    get day(): string { console.log('BITCH'); return 'Teszt'; }
 }

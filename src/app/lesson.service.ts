@@ -15,7 +15,7 @@ export class LessonService {
   constructor(private http: HttpClient) { }
 
   getAll(): Promise<Subject[]> {
-    return this.http.get<Subject[]>(this.url, httpOptions).toPromise();
+    return this.http.get<Subject[]>(this.url, httpOptions()).toPromise();
   }
 
   getStudents(lesson: Lesson): Promise<User[]> {
@@ -23,10 +23,10 @@ export class LessonService {
   }
 
   addUser(lesson: Lesson, user: User): Promise<User> {
-    return this.http.post<User>(`http://localhost:8080/users/${user.id}/activeLessons`, lesson, httpOptions).toPromise();
+    return this.http.post<User>(`http://localhost:8080/users/${user.id}/activeLessons`, lesson, httpOptions()).toPromise();
   }
 
   removeUser(lesson: Lesson, user: User): Promise<User> {
-    return this.http.delete<User>(`http://localhost:8080/users/${user.id}/activeLessons/${lesson.id}`, httpOptions).toPromise();
+    return this.http.delete<User>(`http://localhost:8080/users/${user.id}/activeLessons/${lesson.id}`, httpOptions()).toPromise();
   }
 }

@@ -1,9 +1,32 @@
+<mat-table [dataSource]="dataSource">
+  
+    <ng-container matColumnDef="subject">
+        <mat-header-cell *matHeaderCellDef>Tantárgy</mat-header-cell>
+        <mat-header-cell *matCellDef="let row">{{row.subject}}</mat-header-cell>
+    </ng-container>
 
-<mat-nav-list>
-  <a *ngFor="let absence of absences" mat-list-item>
-    <h3 matLine>Lesson ID: {{ absence.lesson.id }}</h3>
-    <h4 matLine>Hét: {{ absence.week }}.</h4>
-    <h4 matLine>Hét napja: {{ absence.lesson.weekday }}</h4>
-    <mat-divider></mat-divider>
-  </a>
-</mat-nav-list>
+    <ng-container matColumnDef="day">
+        <mat-header-cell *matHeaderCellDef>Nap</mat-header-cell>
+        <mat-header-cell *matCellDef="let row">{{row.day}}</mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+        <mat-header-cell *matHeaderCellDef>Időpont</mat-header-cell>
+        <mat-header-cell *matCellDef="let row">{{row.time}}</mat-header-cell>
+    </ng-container>
+
+    <ng-container *ngFor="let week of [1,2,3,4,5,6,7,8,9,10,11,12]" matColumnDef="{{week}}">
+        <mat-header-cell *matHeaderCellDef>{{week}}. hét</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.absences.includes(week) ? 'X' : ''}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sum">
+        <mat-header-cell *matHeaderCellDef>Hiányzások száma</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.absences.length}}</mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    
+</mat-table>

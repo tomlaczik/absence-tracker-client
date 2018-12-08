@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatToolbarModule, MatIconModule, MatButtonModule, MatListModule, MatButtonToggleModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatButtonModule, MatListModule, MatButtonToggleModule, MatFormFieldModule, MatInputModule, MatTableModule } from '@angular/material';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { AbsenceListComponent } from './absence-list/absence-list.component';
 import { RoutingModule } from './routing/routing.module';
@@ -33,7 +33,8 @@ import { MyLessonsComponent } from './my-lessons/my-lessons.component';
     HttpClientModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

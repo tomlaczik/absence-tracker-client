@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-export const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': ''
-  })
+export function httpOptions() {
+  const headers = { 'Content-Type': 'application/json' };
+  if(window.localStorage.getItem('token')) {
+    headers['Authorization'] = window.localStorage.getItem('token');
+  }
+  return {
+    headers: new HttpHeaders(headers)
+  };
 };
+
+export const baseUrl: string = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +20,31 @@ export const httpOptions = {
 export class AuthService {
 
   user: User = null;
-  private url: string = 'http://localhost:8080/users/me';
   redirectUrl: string;
+  private url: string = `${baseUrl}/users/me`;
 
   constructor(private http: HttpClient) { }
 
-  async login(username: string, password: string): Promise<User> {
+  async login(username: string, password: string): Promise<any> {
+    const token = btoa(`${username}:${password}`);
+    localStorage.setItem('token', `Basic ${token}`);
+    if(await this.authenticate()) Promise.resolve();
+    else Promise.reject();
+  }
+
+  async authenticate(): Promise<boolean> {
     try {
-      const token = btoa(`${username}:${password}`);
-      httpOptions.headers = httpOptions.headers.set('Authorization', `Basic ${token}`);
-      this.user = await this.http.get<User>(this.url, httpOptions).toPromise();
-      return Promise.resolve(this.user);
-    } catch {
-      return Promise.reject();
+      this.user = await this.http.get<User>(this.url, httpOptions()).toPromise();
+      return Promise.resolve(true);
+    }
+    catch {
+      localStorage.removeItem('token');
+      return Promise.resolve(false);
     }
   }
 
   logout() {
     this.user = null;
-    httpOptions.headers = httpOptions.headers.set('Authorization', '');
+    localStorage.removeItem('token');
   }
 }
