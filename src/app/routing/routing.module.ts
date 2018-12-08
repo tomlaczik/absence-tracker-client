@@ -5,6 +5,7 @@ import { AbsenceListComponent } from "../absence-list/absence-list.component";
 import { LessonListComponent } from '../lesson-list/lesson-list.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthGuard } from '../auth.guard';
+import { MyLessonsComponent } from '../my-lessons/my-lessons.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'absences',
     component: AbsenceListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'mylessons',
+    component: MyLessonsComponent,
     canActivate: [AuthGuard]
   },
 ];

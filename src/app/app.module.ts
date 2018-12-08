@@ -11,13 +11,15 @@ import { RoutingModule } from './routing/routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MyLessonsComponent } from './my-lessons/my-lessons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LessonListComponent,
     AbsenceListComponent,
-    LoginComponent
+    LoginComponent,
+    MyLessonsComponent
   ],
   imports: [
     BrowserModule,
