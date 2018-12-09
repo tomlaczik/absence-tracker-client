@@ -1,35 +1,31 @@
 <mat-toolbar color="primary">
   Absence Tracker
-  <div *ngIf="authService.user">
-    <button mat-button routerLink="/lessons">
-      <mat-icon>book</mat-icon> Tanórák
-    </button>
-    <button mat-button routerLink="/absences">
-      <mat-icon>today</mat-icon> Hiányzások
-    </button>
-    <!--Az authorized user role-ja alapján el kéne tűntetni, próbáékoztam,
-      de nemigazán jött össze mert nem ismeri a Role-t.
-      Nem tudtam, hogy hogyan kéne rá hivatkozni/hova kéne létrehozni
-    -->
-    <button mat-button routerLink="/mylessons">
-      <mat-icon>book</mat-icon> Saját Órák
-    </button>
-    <!--Az authorized user role-ja alapján el kéne tűntetni, próbáékoztam,
-      de nemigazán jött össze mert nem ismeri a Role-t.
-      Nem tudtam, hogy hogyan kéne rá hivatkozni/hova kéne létrehozni
-    -->
-    <button mat-button routerLink="/absence_overview">
-      <mat-icon>today</mat-icon> Hiányzások kezelése
-    </button>
+  <ng-container *ngIf="authService.user">
+    <ng-container *ngIf="authService.user.role === 'STUDENT'">
+      <button mat-button routerLink="/lessons">
+        <mat-icon>book</mat-icon> Tanórák
+      </button>
+      <button mat-button routerLink="/absences">
+        <mat-icon>today</mat-icon> Hiányzások
+      </button>
+    </ng-container>
+    <ng-container *ngIf="authService.user.role === 'TEACHER'">
+      <button mat-button routerLink="/mylessons">
+        <mat-icon>book</mat-icon> Saját Órák
+      </button>
+      <button mat-button routerLink="/absence_overview">
+        <mat-icon>today</mat-icon> Hiányzások kezelése
+      </button>
+    </ng-container>
     <button mat-button (click)="logout()">
       <mat-icon>lock</mat-icon> Kijelentkezés ({{authService.user.username}})
     </button>
-  </div>
-  <div *ngIf="!authService.user">
+  </ng-container>
+  <ng-container *ngIf="!authService.user">
     <button mat-button routerLink="/login">
       <mat-icon>lock</mat-icon> Bejelentkezés
     </button>
-  </div>
+  </ng-container>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
