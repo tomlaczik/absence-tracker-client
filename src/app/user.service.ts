@@ -16,4 +16,8 @@ export class UserService {
   getAbsences(user: User): Promise<Absence[]> {
     return this.http.get<Absence[]>(`${this.url}/${user.id}/absences`, httpOptions()).toPromise();
   }
+
+  getAll(): Promise<User[]>{
+    return this.http.get<User[]>(`${this.url}/`,httpOptions()).toPromise();
+  }
 }

@@ -1,4 +1,3 @@
-<!--Mintád alapján a tanár saját órái, ezt normálisan megcsinálja-->
 <mat-list>
   <ng-container *ngFor="let subject of subjects; last as last">
     <h2 matSubheader>{{subject.name}}</h2>
@@ -14,14 +13,24 @@
   </ng-container>
 </mat-list>
 
-<!--Ez lenne a kijjelölt lesson userei de nemigazán működik a clickHandler-->
 <mat-list *ngIf="lessonStudents">
   <h2>Hallgatók:</h2>
+  <div>Nap: {{ selectedLesson.weekday}}</div>
+  <div>Időpont: {{ selectedLesson.time}}</div>
   <ng-container *ngFor="let student of lessonStudents; last as last">
       <mat-list-item>
-        <h3 matLine>{{student.username}}</h3>
+        <h3 matLine (click)="removeStudent(student)">{{student.username}}</h3>
         <mat-checkbox [checked]="isAbsenceChecked(student, week)" (click)="toggleAbsence(student, week, selectedLesson)" *ngFor="let week of [1,2,3,4,5,6,7,8,9,10,11,12]">{{week}}. hét</mat-checkbox>
       </mat-list-item>
     <mat-divider *ngIf="!last"></mat-divider>
   </ng-container>
 </mat-list>
+
+<mat-form-field *ngIf="lessonStudents">
+  <h3>Hallgató hozzáadása</h3>
+  <mat-select>
+    <mat-option *ngFor = "let student of allStudents">
+      <p *ngIf="!isInLesson(student)" (click)="addStudent(student)">{{student.username}}</p>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

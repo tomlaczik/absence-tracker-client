@@ -6,6 +6,7 @@ import { Lesson } from '../lesson';
 import { User } from '../user';
 import { Absence } from '../absence';
 import { AbsenceService } from '../absence.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'my-lessons',
@@ -17,8 +18,9 @@ export class MyLessonsComponent implements OnInit {
   private subjects: Subject[];
   private lessonStudents: User[];
   private selectedLesson: Lesson;
+  private allStudents: User[];
 
-  constructor(private lessonService: LessonService, private authService: AuthService, private absenceService: AbsenceService) {}
+  constructor(private lessonService: LessonService, private authService: AuthService, private absenceService: AbsenceService, private userService: UserService) {}
 
   async ngOnInit() {
     this.subjects = await this.lessonService.getAll();
@@ -27,6 +29,19 @@ export class MyLessonsComponent implements OnInit {
   async clickHandler(lesson : Lesson){
     this.selectedLesson = lesson;
     this.lessonStudents = await this.lessonService.getStudents(lesson);
+    this.allStudents = await this.userService.getAll();
+  }
+
+  isInLesson(user: User): boolean{
+    return this.lessonStudents.some(aUser => aUser.id === user.id);
+  }
+
+  async addStudent(user: User){
+    await this.lessonService.addUser(this.selectedLesson, user);
+  }
+  
+  async removeStudent(user: User){
+    await this.lessonService.removeUser(this.selectedLesson, user);
   }
 
   isMyLesson(lesson: Lesson): boolean {
