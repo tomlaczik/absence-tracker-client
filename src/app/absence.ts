@@ -6,4 +6,8 @@ export class Absence {
     user: User;
     lesson: Lesson;
     week: number;
+
+    constructor(week: number) {
+        this.week = week;
+    }
 }

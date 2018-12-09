@@ -4,6 +4,7 @@ import { Subject } from './subject';
 import { httpOptions } from './auth.service';
 import { User } from './user';
 import { Lesson } from './lesson';
+import { Absence } from './absence';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class LessonService {
 
   removeUser(lesson: Lesson, user: User): Promise<User> {
     return this.http.delete<User>(`http://localhost:8080/users/${user.id}/activeLessons/${lesson.id}`, httpOptions()).toPromise();
+  }
+
+  addAbsence(absence: Absence, lesson: Lesson, user: User): Promise<Absence> {
+    return this.http.post<Absence>(`http://localhost:8080/lessons/${lesson.id}/absences?user=${user.id}`, absence, httpOptions()).toPromise();
   }
 }

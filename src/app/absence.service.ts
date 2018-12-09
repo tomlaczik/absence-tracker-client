@@ -19,4 +19,8 @@ export class AbsenceService {
     return this.http.get<Absence[]>(`http://localhost:8080/users/${user.id}/absences`, httpOptions()).toPromise();
   }
 
+  delete(absence: Absence): Promise<Absence> {
+    return this.http.delete<Absence>(`http://localhost:8080/absences/${absence.id}`, httpOptions()).toPromise();
+  }
+
 }

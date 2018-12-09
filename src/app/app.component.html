@@ -9,14 +9,9 @@
         <mat-icon>today</mat-icon> Hiányzások
       </button>
     </ng-container>
-    <ng-container *ngIf="authService.user.role === 'TEACHER'">
-      <button mat-button routerLink="/mylessons">
-        <mat-icon>book</mat-icon> Saját Órák
-      </button>
-      <button mat-button routerLink="/absence_overview">
-        <mat-icon>today</mat-icon> Hiányzások kezelése
-      </button>
-    </ng-container>
+    <button *ngIf="authService.user.role === 'TEACHER'" mat-button routerLink="/mylessons">
+      <mat-icon>book</mat-icon> Saját Órák
+    </button>
     <button mat-button (click)="logout()">
       <mat-icon>lock</mat-icon> Kijelentkezés ({{authService.user.username}})
     </button>
