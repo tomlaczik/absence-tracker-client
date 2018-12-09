@@ -2,11 +2,13 @@
   <ng-container *ngFor="let subject of subjects; last as last">
     <h2 matSubheader>{{subject.name}}</h2>
     <ng-container *ngFor="let lesson of subject.lessons">
-      <mat-list-item *ngIf="isMyLesson(lesson)"
-        (click)="clickHandler(lesson)"
-      >
+      <mat-list-item *ngIf="isMyLesson(lesson)">
         <h3 matLine>Nap: {{lesson.weekday}}</h3>
         <h3 matLine>Időpont: {{lesson.time}}</h3>
+        <button mat-button (click)="clickHandler(lesson)" color="primary">
+          <mat-icon>list</mat-icon>
+          Hiányzások
+        </button>
       </mat-list-item>
     </ng-container>
     <mat-divider *ngIf="!last"></mat-divider>
@@ -19,7 +21,10 @@
   <div>Időpont: {{ selectedLesson.time}}</div>
   <ng-container *ngFor="let student of lessonStudents; last as last">
       <mat-list-item>
-        <h3 matLine (click)="removeStudent(student)">{{student.username}}</h3>
+        <h3 matLine>{{student.username}}</h3>
+        <button mat-button (click)="removeStudent(student)" color="secondary">
+          <mat-icon>delete</mat-icon>
+        </button>
         <mat-checkbox [checked]="isAbsenceChecked(student, week)" (click)="toggleAbsence(student, week, selectedLesson)" *ngFor="let week of [1,2,3,4,5,6,7,8,9,10,11,12]">{{week}}. hét</mat-checkbox>
       </mat-list-item>
     <mat-divider *ngIf="!last"></mat-divider>
@@ -29,8 +34,10 @@
 <mat-form-field *ngIf="lessonStudents">
   <h3>Hallgató hozzáadása</h3>
   <mat-select>
-    <mat-option *ngFor = "let student of allStudents">
-      <p *ngIf="!isInLesson(student)" (click)="addStudent(student)">{{student.username}}</p>
-    </mat-option>
+    <ng-container *ngFor="let user of allUsers">
+      <mat-option *ngIf="!isInLesson(user) && isStudent(user)" (click)="addStudent(user)">
+        {{user.username}}
+      </mat-option>
+    </ng-container>
   </mat-select>
 </mat-form-field>

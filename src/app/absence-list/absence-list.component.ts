@@ -54,8 +54,9 @@ export class AbsenceListComponent implements OnInit {
     }
 
     for(let absence of absences) {
+      console.log(absence);
       let index = formattedData.findIndex(row =>
-        row.subject === absence.lesson.subject.name &&
+        row.subject === subjects.find(subject => subject.lessons.some(lesson => lesson.id === absence.lesson.id)).name &&
         row.day === days[absence.lesson.weekday] &&
         row.time === absence.lesson.time
       );

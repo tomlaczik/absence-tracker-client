@@ -18,7 +18,7 @@ export class MyLessonsComponent implements OnInit {
   private subjects: Subject[];
   private lessonStudents: User[];
   private selectedLesson: Lesson;
-  private allStudents: User[];
+  private allUsers: User[];
 
   constructor(private lessonService: LessonService, private authService: AuthService, private absenceService: AbsenceService, private userService: UserService) {}
 
@@ -29,19 +29,25 @@ export class MyLessonsComponent implements OnInit {
   async clickHandler(lesson : Lesson){
     this.selectedLesson = lesson;
     this.lessonStudents = await this.lessonService.getStudents(lesson);
-    this.allStudents = await this.userService.getAll();
+    this.allUsers = await this.userService.getAll();
   }
 
-  isInLesson(user: User): boolean{
+  isInLesson(user: User): boolean {
     return this.lessonStudents.some(aUser => aUser.id === user.id);
   }
 
-  async addStudent(user: User){
+  isStudent(user: User): boolean {
+    return user.role.toString() === 'STUDENT';
+  }
+
+  async addStudent(user: User) {
     await this.lessonService.addUser(this.selectedLesson, user);
+    this.lessonStudents.push(user);
   }
   
-  async removeStudent(user: User){
+  async removeStudent(user: User) {
     await this.lessonService.removeUser(this.selectedLesson, user);
+    this.lessonStudents.splice(this.lessonStudents.findIndex(student => student.id === user.id), 1);
   }
 
   isMyLesson(lesson: Lesson): boolean {
