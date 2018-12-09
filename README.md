@@ -25,7 +25,8 @@
 ### Tanár
 - belépés
 - Tanított órák kilistázása
-  - Rákattintva egy órára kilistázódnak az arra járó diákok.
+  - Rákattintva egy órára kilistázódnak az arra járó diákok és mellettük hetekre bontva\
+    a hiányzásuk jelölőnégyzetekkel, amiket ki- és bepipálva hiányzást ír be vagy töröl ki.
   - Hozzáadhat diákot vagy kitörölhet diákot egy-egy óráról.
 - Saját órákhoz tartozó hiányzások kilistázása
   - Új hiányzás beírása.
@@ -33,3 +34,7 @@
 ## Használati eset diagram
 
 ![alt text](https://github.com/tomlaczik/absence-tracker-client/blob/master/usecase.png)
+
+## Könyvtár struktúra
+
+![alt text](https://github.com/tomlaczik/absence-tracker-client/blob/master/folder_structure.PNG)
