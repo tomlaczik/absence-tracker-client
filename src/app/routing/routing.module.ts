@@ -6,6 +6,7 @@ import { LessonListComponent } from '../lesson-list/lesson-list.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthGuard } from '../auth.guard';
 import { MyLessonsComponent } from '../my-lessons/my-lessons.component';
+import { AbsenceOverviewComponent } from '../absence-overview/absence-overview.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'mylessons',
     component: MyLessonsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'absence_overview',
+    component: AbsenceOverviewComponent,
     canActivate: [AuthGuard]
   },
 ];

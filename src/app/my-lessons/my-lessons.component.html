@@ -4,7 +4,7 @@
     <h2 matSubheader>{{subject.name}}</h2>
     <ng-container *ngFor="let lesson of subject.lessons">
       <mat-list-item *ngIf="isMyLesson(lesson)"
-        (click)="clickHandler($event)"
+        (click)="clickHandler(lesson)"
       >
         <h3 matLine>Nap: {{lesson.weekday}}</h3>
         <h3 matLine>Időpont: {{lesson.time}}</h3>
@@ -17,7 +17,6 @@
 <!--Ez lenne a kijjelölt lesson userei de nemigazán működik a clickHandler-->
 <mat-list *ngIf="selectedLesson != null">
   <div >Hallgatók: </div>
-  <div >{{ selectedLesson }} </div>
   <div *ngFor="let hallgato of lessonSubject; last as last">
       <mat-list-item>
         <h3 matLine>Nap: {{hallgato.username}}</h3>

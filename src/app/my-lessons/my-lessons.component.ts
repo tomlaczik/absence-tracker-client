@@ -21,11 +21,8 @@ export class MyLessonsComponent implements OnInit {
     this.subjects = await this.lessonService.getAll();
   }
 
-  clickHandler(event){
-    // Az event egy MouseEvent object amiből nemtudom, hogy hogyan kéne kiszedni az elemet amire rákattintottam
-    // Egy lessonnek kéne lennie, és a lesson id lapján pedig a lessonservice-ben írtam egy metódust, ami
-    // lessons/id/students végpontot keresi meg és az adná vissza az arra az órára járó diákokat
-    this.selectedLesson = event;
+  clickHandler(lesson : Lesson){
+    this.selectedLesson = lesson;
     this.getStudents();
   }
 

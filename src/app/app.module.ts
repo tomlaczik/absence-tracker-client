@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyLessonsComponent } from './my-lessons/my-lessons.component';
+import { AbsenceOverviewComponent } from './absence-overview/absence-overview.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MyLessonsComponent } from './my-lessons/my-lessons.component';
     LessonListComponent,
     AbsenceListComponent,
     LoginComponent,
-    MyLessonsComponent
+    MyLessonsComponent,
+    AbsenceOverviewComponent
   ],
   imports: [
     BrowserModule,

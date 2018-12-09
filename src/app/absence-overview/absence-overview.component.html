@@ -1,0 +1,10 @@
+<mat-list>
+  <div *ngFor="let absence of absences; last as last">
+      <mat-list-item *ngIf="isMyLesson(absence.lesson)">
+        <h3 matLine>Hallgató kódja: {{absence.user}}</h3>
+        <h3 matLine>Óra kódja: {{absence.lesson.id}}</h3>
+        <h3 matLine>Hét: {{absence.week}}</h3>
+      </mat-list-item>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </div>
+</mat-list>
