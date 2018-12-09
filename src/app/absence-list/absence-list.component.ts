@@ -54,15 +54,17 @@ export class AbsenceListComponent implements OnInit {
     }
 
     for(let absence of absences) {
-      console.log(absence);
-      let index = formattedData.findIndex(row =>
-        row.subject === subjects.find(subject => subject.lessons.some(lesson => lesson.id === absence.lesson.id)).name &&
-        row.day === days[absence.lesson.weekday] &&
-        row.time === absence.lesson.time
-      );
+      let subject = subjects.find(subject => subject.lessons.some(lesson => lesson.id === absence.lesson.id));
+      if(subject) {
+        let index = formattedData.findIndex(row =>
+          row.subject === subject.name &&
+          row.day === days[absence.lesson.weekday] &&
+          row.time === absence.lesson.time
+        );
 
-      if(index !== -1) {
-        formattedData[index].absences.push(absence.week);
+        if(index !== -1) {
+          formattedData[index].absences.push(absence.week);
+        }
       }
     }
 
