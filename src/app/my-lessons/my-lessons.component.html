@@ -15,9 +15,9 @@
 </mat-list>
 
 <!--Ez lenne a kijjelölt lesson userei de nemigazán működik a clickHandler-->
-<mat-list *ngIf="selectedLesson != null">
+<mat-list *ngIf="lessonStudents">
   <div >Hallgatók: </div>
-  <div *ngFor="let hallgato of lessonSubject; last as last">
+  <div *ngFor="let hallgato of lessonStudents; last as last">
       <mat-list-item>
         <h3 matLine>Nap: {{hallgato.username}}</h3>
       </mat-list-item>

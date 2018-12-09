@@ -19,7 +19,7 @@ export class LessonService {
   }
 
   getStudents(lesson: Lesson): Promise<User[]> {
-    return this.http.get<User[]>(`http://localhost:8080/lessons/${lesson.id}/students`).toPromise();
+    return this.http.get<User[]>(`http://localhost:8080/lessons/${lesson.id}/students`, httpOptions()).toPromise();
   }
 
   addUser(lesson: Lesson, user: User): Promise<User> {

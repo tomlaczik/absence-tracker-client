@@ -3,6 +3,7 @@ import { Subject } from '../subject';
 import { LessonService } from '../lesson.service';
 import { AuthService } from '../auth.service';
 import { Lesson } from '../lesson';
+import { User } from '../user';
 
 @Component({
   selector: 'my-lessons',
@@ -12,8 +13,7 @@ import { Lesson } from '../lesson';
 export class MyLessonsComponent implements OnInit {
 
   private subjects: Subject[];
-  private selectedLesson: Lesson = null;
-  private lessonStudents = [];
+  private lessonStudents: User[];
 
   constructor(private lessonService: LessonService, private authService: AuthService) {}
 
@@ -21,17 +21,12 @@ export class MyLessonsComponent implements OnInit {
     this.subjects = await this.lessonService.getAll();
   }
 
-  clickHandler(lesson : Lesson){
-    this.selectedLesson = lesson;
-    this.getStudents();
+  async clickHandler(lesson : Lesson){
+    this.lessonStudents = await this.lessonService.getStudents(lesson);
   }
 
   isMyLesson(lesson: Lesson) {
     return this.authService.user.taughtLessons.some(aLesson => aLesson.id === lesson.id);
-  }
-
-  async getStudents(){
-    this.lessonStudents = await this.lessonService.getStudents(this.selectedLesson);
   }
 
 }
