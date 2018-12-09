@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export function httpOptions() {
   const headers = { 'Content-Type': 'application/json' };
@@ -22,12 +23,12 @@ export class AuthService {
   user: User = null;
   redirectUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   async login(username: string, password: string): Promise<any> {
     const token = btoa(`${username}:${password}`);
     localStorage.setItem('token', `Basic ${token}`);
-    if(await this.authenticate()) Promise.resolve();
+    if(await this.authenticate(null)) Promise.resolve();
     else Promise.reject();
   }
 
@@ -44,10 +45,12 @@ export class AuthService {
     }
   }
 
-  async authenticate(): Promise<boolean> {
+  async authenticate(roles: string[]): Promise<boolean> {
     try {
       this.user = await this.http.get<User>(`${baseUrl}/users/me`, httpOptions()).toPromise();
-      return Promise.resolve(true);
+      if(!roles || roles.includes(this.user.role.toString())) return Promise.resolve(true);
+      this.router.navigate(['/login']);
+      return Promise.resolve(false);
     }
     catch {
       localStorage.removeItem('token');

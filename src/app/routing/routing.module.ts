@@ -16,28 +16,35 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    data: {
+      roles: ['GUEST']
+    }
   },
   {
     path: 'lessons',
     component: LessonListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['STUDENT', 'ADMIN']
+    }
   },
   {
     path: 'absences',
     component: AbsenceListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['STUDENT', 'ADMIN']
+    }
   },
   {
     path: 'mylessons',
     component: MyLessonsComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'absence_overview',
-    component: AbsenceOverviewComponent,
-    canActivate: [AuthGuard]
-  },
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['TEACHER', 'ADMIN']
+    }
+  }
 ];
 
 @NgModule({
