@@ -39,6 +39,27 @@
 
 ![alt text](https://github.com/tomlaczik/absence-tracker-client/blob/master/folder_structure.PNG)
 
+## Kapcsolat a szerverrel
+
+ ### A kapcsolatot a szerverel az alábbi service-ek nyújtják az applikációnak:
+  - absence.service :
+    - Összes hiányzás elérése ~ getAll() ~ (/absences @GetMapping)
+    - Egy adott user hiányzásainak elérése ~ getSelf(user: User) ~ (/users/id/absences @GetMapping)
+    - Egy adott hiányzás törlése ~ delete(absence: Absence) ~ (absences/absence.id @DeleteMapping)
+  - lesson.service :
+    - Összes tantárgy elérése ~ getAll() ~ (/subjects @GetMapping) 
+    - Egy adott tanóra hallgatóinak elérése ~ getStudents(lesson: Lesson) ~ (/lessons/id/students @GetMapping)
+    - Egy hallgató hozzáadása egy tanórához ~ addUser(lesson: Lesson, user: User) ~ (users/id/activeLessons @PostMapping)
+    - Egy hallgató levétele egy tanóráról ~ removeUser(lesson: Lesson, user: User) ~ (users/id/activeLessons/id @DeleteMapping)
+    - Egy tanórára járó diákhoz hiányzás beírása ~ addAbsence(absence: Absence, lesson: Lesson, user: User) ~\ (lessons/id/absences?user=id @PostMApping)
+  - user.service :
+    - Egy adott user hiányzásainak elérése ~ getAbsences(user: User) ~ (/users/id/absences @GetMapping)
+    - Összes Hallgató elérése ~ getAll() ~ (/users @GetMapping)
+  - auth.service :
+    - beléptetés ~ login(username: string, password: string)
+    - autentikáció ~ authenticate() ~ (/users/me @GetMapping)
+    - regisztráció ~ register(username: string, password: string) ~ (/users @ PostMapping)
+
 ## Felhasználói dokumentáció
 
 ### Tanárok részere
@@ -47,7 +68,7 @@
   profil-t hoz létre. A tanárokat az adminok tudják kijelölni.
 - Belépés után a menüsávban kettő opció vállik elérhetővé:
   - Saját Órák:
-    - A saját Órák-ra kattintva érhetjük el az általunk tanított órák listáját. Egy órára kattintva a lap alján megjelenik az adott           órára járó hallgatók listája mellettük a hetek felsorolva jelölőnégyzetekkel. Ha egy négyzetet bepipálunk, akkor az adott sorban         lévő diáknak írtunk be egy hiányzást az oszlopban feltüntetett hétre. Ha a pipát kivesszük, a hiányzást kitöröltük. A diákok             tudják követni a saját hiányzásaikat.
+    - A saját Órák-ra kattintva érhetjük el az általunk tanított órák listáját. Egy órára kattintva a lap alján megjelenik az adott           órára járó hallgatók listája mellettük a hetek felsorolva jelölőnégyzetekkel. Ha egy négyzetet bepipálunk, akkor az adott sorban         lévő diáknak írtunk be egy hiányzást az oszlopban feltüntetett hétre. Ha a pipát kivesszük, a hiányzást kitöröltük. A diákok             tudják követni a saját hiányzásaikat. Ha rákattintunk a diák nevére, eltávolítjuk az óránkról. Emelett még megjelenik egy lenyíló       ablak, amiben láthattjuk azokat a felhasználókat, akik nincsenek feljelentekzve az órára. Egyet ezek közül kiválasztva, felvesszük       őt az óránkra.
   - Kijelentkezés:
     - A kijelentekzés gombra kattintva a rendszer kijelentkeztet és vissza kerülünk a beléptető oldalra.
   
