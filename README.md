@@ -33,7 +33,7 @@
   
 ## Használati eset diagram
 
-![alt text](https://github.com/tomlaczik/absence-tracker-client/blob/master/usecase.png)
+![alt text](https://github.com/tomlaczik/absence-tracker-client/blob/master/newusecase.png)
 
 ## Könyvtár struktúra
 
