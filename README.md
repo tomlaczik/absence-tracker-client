@@ -28,8 +28,6 @@
   - Rákattintva egy órára kilistázódnak az arra járó diákok és mellettük hetekre bontva\
     a hiányzásuk jelölőnégyzetekkel, amiket ki- és bepipálva hiányzást ír be vagy töröl ki.
   - Hozzáadhat diákot vagy kitörölhet diákot egy-egy óráról.
-- Saját órákhoz tartozó hiányzások kilistázása
-  - Új hiányzás beírása.
   
 ## Használati eset diagram
 
